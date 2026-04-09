@@ -1,0 +1,51 @@
+# eap-common — LLM Context
+
+> Shared library (not a runnable service). All modules depend on this.
+
+## Event Schemas
+
+### OrderSubmittedEvent
+```
+orderId: UUID, userId: UUID, price: Integer, amount: Integer,
+orderType: String ("BUY"|"SELL"), createdAt: LocalDateTime
+```
+
+### OrderConfirmedEvent
+```
+orderId: UUID, userId: UUID, price: Integer, amount: Integer,
+orderType: String, createdAt: LocalDateTime
+```
+
+### OrderMatchedEvent
+```
+matchId: Integer, buyerId: UUID, sellerId: UUID,
+buyerOrderId: UUID, sellerOrderId: UUID,
+originBuyerPrice: Integer, originSellerPrice: Integer,
+dealPrice: Integer, amount: Integer,
+matchedAt: LocalDateTime, orderType: String
+```
+
+### OrderFailedEvent
+```
+orderId: UUID, userId: UUID, reason: String,
+failureType: String ("INSUFFICIENT_BALANCE"|"INSUFFICIENT_AMOUNT"|"WALLET_NOT_FOUND"|...),
+failedAt: LocalDateTime
+```
+
+### OrderCancelEvent
+```
+orderId: UUID
+```
+
+## Constants
+
+RabbitMQ routing keys, queue names, and exchange names are defined in
+`src/main/java/com/eap/common/constant/RabbitMQConstants.java`.
+
+## Key Files
+
+| What | Path |
+|------|------|
+| Events | src/main/java/com/eap/common/event/ |
+| Constants | src/main/java/com/eap/common/constant/ |
+| DTOs | src/main/java/com/eap/common/dto/ |
