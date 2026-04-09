@@ -35,6 +35,26 @@ public class RabbitMQConstants {
     public static final String ORDER_ORDER_MATCHED_QUEUE = "order.orderMatched.queue";
     public static final String ORDER_ORDER_FAILED_QUEUE = "order.orderFailed.queue";
     
+    // Auction Exchange
+    public static final String AUCTION_EXCHANGE = "auction.exchange";
+
+    // Auction Routing Keys
+    public static final String AUCTION_CREATED_KEY = "auction.created";
+    public static final String AUCTION_BID_SUBMITTED_KEY = "auction.bid.submitted";
+    public static final String AUCTION_CLEARED_KEY = "auction.cleared";
+    public static final String AUCTION_BID_RESULT_KEY = "auction.bid.result";
+
+    // Wallet Module Auction Queue Names
+    public static final String WALLET_AUCTION_BID_SUBMITTED_QUEUE = "wallet.auctionBidSubmitted.queue";
+    public static final String WALLET_AUCTION_CLEARED_QUEUE = "wallet.auctionCleared.queue";
+
+    // Order Module Auction Queue Names
+    public static final String ORDER_AUCTION_CLEARED_QUEUE = "order.auctionCleared.queue";
+    public static final String ORDER_AUCTION_CREATED_QUEUE = "order.auctionCreated.queue";
+
+    // MatchEngine Module Auction Queue Names
+    public static final String MATCH_ENGINE_AUCTION_BID_SUBMITTED_QUEUE = "matchEngine.auctionBidSubmitted.queue";
+
     // Legacy queue names (deprecated - kept for reference during migration)
     @Deprecated
     public static final String ORDER_CREATE_QUEUE = "order.create.queue";
