@@ -41,6 +41,7 @@ public class RabbitMQConstants {
     // Auction Routing Keys
     public static final String AUCTION_CREATED_KEY = "auction.created";
     public static final String AUCTION_BID_SUBMITTED_KEY = "auction.bid.submitted";
+    public static final String AUCTION_BID_CONFIRMED_KEY = "auction.bid.confirmed";
     public static final String AUCTION_CLEARED_KEY = "auction.cleared";
     public static final String AUCTION_BID_RESULT_KEY = "auction.bid.result";
 
@@ -53,6 +54,9 @@ public class RabbitMQConstants {
     public static final String ORDER_AUCTION_CREATED_QUEUE = "order.auctionCreated.queue";
 
     // MatchEngine Module Auction Queue Names
+    public static final String MATCH_ENGINE_AUCTION_BID_CONFIRMED_QUEUE = "matchEngine.auctionBidConfirmed.queue";
+
+    @Deprecated
     public static final String MATCH_ENGINE_AUCTION_BID_SUBMITTED_QUEUE = "matchEngine.auctionBidSubmitted.queue";
 
     // Legacy queue names (deprecated - kept for reference during migration)
