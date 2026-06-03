@@ -15,6 +15,12 @@ public class PlaceOrderResponse {
     
     @JsonProperty("orderId")
     private String orderId;
+
+    @JsonProperty("marketId")
+    private String marketId;
+
+    @JsonProperty("marketSequence")
+    private Long marketSequence;
     
     @JsonProperty("status")
     private String status;
@@ -45,8 +51,15 @@ public class PlaceOrderResponse {
     
     public static PlaceOrderResponse success(String orderId, String side, String type, 
                                            BigDecimal price, BigDecimal qty, String symbol) {
+        return success(orderId, null, null, side, type, price, qty, symbol);
+    }
+
+    public static PlaceOrderResponse success(String orderId, String marketId, Long marketSequence, String side, String type,
+                                           BigDecimal price, BigDecimal qty, String symbol) {
         PlaceOrderResponse response = new PlaceOrderResponse();
         response.setOrderId(orderId);
+        response.setMarketId(marketId);
+        response.setMarketSequence(marketSequence);
         response.setStatus("PENDING");
         response.setAcceptedAt(LocalDateTime.now());
         response.setSide(side);

@@ -17,6 +17,9 @@ public class OrderMatchedEvent {
     private UUID sellerId;
     private UUID buyerOrderId;
     private UUID sellerOrderId;
+    private String marketId;
+    private Long buyerMarketSequence;
+    private Long sellerMarketSequence;
     private Integer originBuyerPrice;
     private Integer originSellerPrice;
     private Integer dealPrice;

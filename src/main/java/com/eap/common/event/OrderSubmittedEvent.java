@@ -15,6 +15,8 @@ import java.util.UUID;
 public class OrderSubmittedEvent {
   private UUID orderId;
   private UUID userId;
+  private String marketId;
+  private Long marketSequence;
   private Integer price;
   private Integer amount;
   private String orderType; // "BUY" or "SELL"
