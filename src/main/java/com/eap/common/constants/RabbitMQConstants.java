@@ -35,6 +35,7 @@ public class RabbitMQConstants {
     // Order Module Queue Names
     public static final String ORDER_ORDER_CONFIRMED_QUEUE = "order.orderConfirmed.queue";
     public static final String ORDER_ORDER_MATCHED_QUEUE = "order.orderMatched.queue";
+    public static final String ORDER_TRADE_EXECUTED_QUEUE = "order.tradeExecuted.queue";
     public static final String ORDER_ORDER_FAILED_QUEUE = "order.orderFailed.queue";
     
     // Auction Exchange
