@@ -22,15 +22,20 @@ public class RabbitMQConstants {
     public static final String ORDER_CONFIRMED_KEY = "order.confirmed";
     public static final String ORDER_MATCHED_KEY = "order.matched";
     public static final String TRADE_EXECUTED_KEY = "trade.executed";
+    public static final String TRADE_ORDER_APPLIED_KEY = "trade.order.applied";
+    public static final String TRADE_WALLET_SETTLED_KEY = "trade.wallet.settled";
     public static final String ORDER_CANCEL_KEY = "order.cancel";
     public static final String ORDER_FAILED_KEY = "order.failed";
     
     // Wallet Module Queue Names
     public static final String WALLET_ORDER_SUBMITTED_QUEUE = "wallet.orderSubmitted.queue";
     public static final String WALLET_ORDER_MATCHED_QUEUE = "wallet.orderMatched.queue";
+    public static final String WALLET_TRADE_EXECUTED_QUEUE = "wallet.tradeExecuted.queue";
     
     // MatchEngine Module Queue Names
     public static final String MATCH_ENGINE_ORDER_CONFIRMED_QUEUE = "matchEngine.orderConfirmed.queue";
+    public static final String MATCH_ENGINE_ORDER_TRADE_APPLIED_QUEUE = "matchEngine.orderTradeApplied.queue";
+    public static final String MATCH_ENGINE_WALLET_TRADE_SETTLED_QUEUE = "matchEngine.walletTradeSettled.queue";
     
     // Order Module Queue Names
     public static final String ORDER_ORDER_CONFIRMED_QUEUE = "order.orderConfirmed.queue";
