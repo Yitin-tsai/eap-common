@@ -11,6 +11,7 @@ public class RabbitMQConstants {
     
     // Exchange 名稱
     public static final String ORDER_EXCHANGE = "order.exchange";
+    public static final String TRADE_EXCHANGE = "trade.exchange";
 
     // Dead Letter Exchange / Queue (ADR-001)
     public static final String DEAD_LETTER_EXCHANGE = "order.dlx";
@@ -20,6 +21,7 @@ public class RabbitMQConstants {
     public static final String ORDER_SUBMITTED_KEY = "order.submitted";
     public static final String ORDER_CONFIRMED_KEY = "order.confirmed";
     public static final String ORDER_MATCHED_KEY = "order.matched";
+    public static final String TRADE_EXECUTED_KEY = "trade.executed";
     public static final String ORDER_CANCEL_KEY = "order.cancel";
     public static final String ORDER_FAILED_KEY = "order.failed";
     

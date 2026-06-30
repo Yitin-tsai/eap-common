@@ -1,17 +1,22 @@
 # EAP Common Module
 
-This module contains shared code and constants used across EAP microservices.
+Shared contracts for the EAP workspace.
 
-## Features
+This module carries the DTOs, events, enums, and RabbitMQ constants that need to stay consistent across `eap-order`, `eap-wallet`, `eap-matchEngine`, `eap-mcp`, and `eap-ai-client`.
 
-### RabbitMQ Constants
-- Queue names
-- Exchange names
-- Routing keys
+## What lives here
+
+- `constants/` - shared exchange, queue, and routing-key definitions
+- `dto/` - request/response models shared across services
+- `event/` - event payloads published through RabbitMQ
+
+## Why it exists
+
+- Keep cross-service contracts in one place
+- Reduce copy/paste drift between services
+- Make event schema changes visible in one module before they break listeners
 
 ## Usage
-
-Add the following dependency to your build.gradle:
 
 ```gradle
 dependencies {
@@ -19,28 +24,16 @@ dependencies {
 }
 ```
 
-Example usage:
+## Change rule
 
-```java
-@Configuration
-public class RabbitMQConfig {
-    @Bean
-    public Queue orderCreatedQueue() {
-        return new Queue(RabbitMQConstants.ORDER_CREATED_QUEUE);
-    }
-}
-```
+If you change a shared DTO or event:
 
-## Development
+1. Update the producer and consumer services in the same branch.
+2. Check the corresponding contract tests.
+3. Keep backward compatibility unless you are intentionally making a breaking change.
 
-When making changes to constants, consider:
-1. Backward compatibility
-2. Impact on other services
-3. Version management
+## Test
 
-## Testing
-
-Run tests using:
 ```bash
 ./gradlew :eap-common:test
 ```
