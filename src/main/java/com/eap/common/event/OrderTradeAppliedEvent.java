@@ -14,10 +14,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class OrderTradeAppliedEvent {
     private String tradeId;
-    private UUID orderId;
-    private String side;
+    private UUID buyerOrderId;
+    private UUID sellerOrderId;
     private Integer legacyMatchId;
     private Integer dealPrice;
     private Integer quantity;
+    private LocalDateTime buyerAppliedAt;
+    private LocalDateTime sellerAppliedAt;
     private LocalDateTime appliedAt;
 }
