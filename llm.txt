@@ -16,13 +16,20 @@ orderId: UUID, userId: UUID, price: Integer, amount: Integer,
 orderType: String, createdAt: LocalDateTime
 ```
 
-### OrderMatchedEvent
+### TradeExecutedEvent
 ```
-matchId: Integer, buyerId: UUID, sellerId: UUID,
+tradeId: String, sequence: Long, legacyMatchId: Integer,
+marketId: String, buyerId: UUID, sellerId: UUID,
 buyerOrderId: UUID, sellerOrderId: UUID,
+buyerMarketSequence: Long, sellerMarketSequence: Long,
 originBuyerPrice: Integer, originSellerPrice: Integer,
-dealPrice: Integer, amount: Integer,
-matchedAt: LocalDateTime, orderType: String
+dealPrice: Integer, quantity: Integer, occurredAt: LocalDateTime
+```
+
+### OrderTradeAppliedEvent / WalletTradeSettledEvent
+```
+tradeId: String plus downstream completion timestamp/evidence.
+Used by MatchEngine completion markers.
 ```
 
 ### OrderFailedEvent
