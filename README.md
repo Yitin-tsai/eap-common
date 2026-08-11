@@ -1,39 +1,41 @@
-# EAP Common Module
+# EAP Common Contracts
 
-Shared contracts for the EAP workspace.
+`eap-common` is a shared Java library, not a service and not a source of business state. It contains the DTOs, event payloads, enums, and RabbitMQ names compiled by the EAP repositories.
 
-This module carries the DTOs, events, enums, and RabbitMQ constants that need to stay consistent across `eap-order`, `eap-wallet`, `eap-matchEngine`, `eap-mcp`, and `eap-ai-client`.
+## Current Core Events
 
-## What lives here
+| Event | Producer | Consumers | Meaning |
+| --- | --- | --- | --- |
+| `OrderSubmittedEvent` | Order | Wallet | request asset reservation for an accepted order |
+| `OrderConfirmedEvent` | Wallet outbox | Order, MatchEngine | reservation succeeded; preserve `marketId` and `marketSequence` |
+| `OrderFailedEvent` | Wallet outbox | Order | reservation failed |
+| `TradeExecutedEvent` | MatchEngine outbox | Order, Wallet | authoritative durable trade fact |
 
-- `constants/` - shared exchange, queue, and routing-key definitions
-- `dto/` - request/response models shared across services
-- `event/` - event payloads published through RabbitMQ
+`OrderTradeAppliedEvent` and `WalletTradeSettledEvent` are retired. Order and Wallet persist their local results without reporting a completion marker to MatchEngine.
 
-## Why it exists
+Timed-auction contracts remain separate under `auction.exchange`:
 
-- Keep cross-service contracts in one place
-- Reduce copy/paste drift between services
-- Make event schema changes visible in one module before they break listeners
+| Event | Producer | Consumers | Current publication boundary |
+| --- | --- | --- | --- |
+| `AuctionCreatedEvent` | MatchEngine scheduler | Order | direct RabbitMQ publication |
+| `AuctionBidSubmittedEvent` | Order | Wallet | direct RabbitMQ publication |
+| `AuctionBidConfirmedEvent` | Wallet outbox | MatchEngine | Wallet state + outbox transaction |
+| `AuctionClearedEvent` | MatchEngine scheduler | Order, Wallet | direct RabbitMQ publication |
 
-## Usage
+These contracts prove that TDA is implemented; they do not give it the CDA path's end-to-end outbox or capacity guarantees.
 
-```gradle
-dependencies {
-    implementation project(':eap-common')
-}
-```
+## Change Rules
 
-## Change rule
+1. Treat event fields and routing keys as cross-repository contracts.
+2. Prefer additive, backward-compatible changes.
+3. Update producers, consumers, tests, and public architecture documentation together.
+4. Use a new event version for a breaking change; do not rely on every service being deployed atomically.
+5. Do not place service-owned business logic or persistence entities in this module.
 
-If you change a shared DTO or event:
-
-1. Update the producer and consumer services in the same branch.
-2. Check the corresponding contract tests.
-3. Keep backward compatibility unless you are intentionally making a breaking change.
-
-## Test
+## Build and Test
 
 ```bash
-./gradlew :eap-common:test
+./gradlew test
 ```
+
+See [EAP system architecture](https://github.com/Yitin-tsai/eap-infra/blob/main/docs/architecture.md) for ownership and event flow.

@@ -1,58 +1,16 @@
-# eap-common — LLM Context
+# eap-common - LLM Context
 
-> Shared library (not a runnable service). All modules depend on this.
+Shared compile-time contracts only; no runnable service and no business-state ownership.
 
-## Event Schemas
+## Core Event Schemas
 
-### OrderSubmittedEvent
-```
-orderId: UUID, userId: UUID, price: Integer, amount: Integer,
-orderType: String ("BUY"|"SELL"), createdAt: LocalDateTime
-```
+- `OrderSubmittedEvent`: `orderId`, `userId`, `marketId`, `marketSequence`, price, amount, side, timestamp.
+- `OrderConfirmedEvent`: preserves the same order identity, market sequence, price, amount, side, and timestamp after reservation.
+- `OrderFailedEvent`: order/user identity, reason, failure type, timestamp.
+- `TradeExecutedEvent`: `tradeId`, execution sequence, market, buyer/seller users and orders, both market sequences, origin prices, deal price, quantity, timestamp.
 
-### OrderConfirmedEvent
-```
-orderId: UUID, userId: UUID, price: Integer, amount: Integer,
-orderType: String, createdAt: LocalDateTime
-```
+`OrderTradeAppliedEvent` and `WalletTradeSettledEvent` are retired. Do not reintroduce a MatchEngine completion callback without a new architecture decision.
 
-### TradeExecutedEvent
-```
-tradeId: String, sequence: Long, legacyMatchId: Integer,
-marketId: String, buyerId: UUID, sellerId: UUID,
-buyerOrderId: UUID, sellerOrderId: UUID,
-buyerMarketSequence: Long, sellerMarketSequence: Long,
-originBuyerPrice: Integer, originSellerPrice: Integer,
-dealPrice: Integer, quantity: Integer, occurredAt: LocalDateTime
-```
+TDA contracts: `AuctionCreatedEvent`, `AuctionBidSubmittedEvent`, `AuctionBidConfirmedEvent`, and `AuctionClearedEvent` on `auction.exchange`. Only Wallet's bid confirmation currently uses an outbox; Order bid submission and MatchEngine create/clear events publish directly. Do not inherit CDA reliability or capacity claims.
 
-### OrderTradeAppliedEvent / WalletTradeSettledEvent
-```
-tradeId: String plus downstream completion timestamp/evidence.
-Used by MatchEngine completion markers.
-```
-
-### OrderFailedEvent
-```
-orderId: UUID, userId: UUID, reason: String,
-failureType: String ("INSUFFICIENT_BALANCE"|"INSUFFICIENT_AMOUNT"|"WALLET_NOT_FOUND"|...),
-failedAt: LocalDateTime
-```
-
-### OrderCancelEvent
-```
-orderId: UUID
-```
-
-## Constants
-
-RabbitMQ routing keys, queue names, and exchange names are defined in
-`src/main/java/com/eap/common/constant/RabbitMQConstants.java`.
-
-## Key Files
-
-| What | Path |
-|------|------|
-| Events | src/main/java/com/eap/common/event/ |
-| Constants | src/main/java/com/eap/common/constant/ |
-| DTOs | src/main/java/com/eap/common/dto/ |
+RabbitMQ constants live at `src/main/java/com/eap/common/constants/RabbitMQConstants.java`.
