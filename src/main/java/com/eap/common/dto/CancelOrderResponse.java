@@ -14,6 +14,9 @@ public class CancelOrderResponse {
     
     @JsonProperty("orderId")
     private String orderId;
+
+    @JsonProperty("cancellationId")
+    private String cancellationId;
     
     @JsonProperty("status")
     private String status;
@@ -27,13 +30,13 @@ public class CancelOrderResponse {
     @JsonProperty("message")
     private String message;
     
-    public static CancelOrderResponse success(String orderId) {
+    public static CancelOrderResponse accepted(String orderId, String cancellationId) {
         CancelOrderResponse response = new CancelOrderResponse();
         response.setOrderId(orderId);
-        response.setStatus("CANCELLED");
-        response.setCancelledAt(LocalDateTime.now());
+        response.setCancellationId(cancellationId);
+        response.setStatus("CANCELLATION_PENDING");
         response.setSuccess(true);
-        response.setMessage("訂單取消成功");
+        response.setMessage("取消請求已受理，等待撮合服務確認");
         return response;
     }
     
