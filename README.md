@@ -7,7 +7,7 @@
 | Event | Producer | Consumers | Meaning |
 | --- | --- | --- | --- |
 | `OrderSubmittedEvent` | Order | Wallet | request asset reservation for an accepted order |
-| `OrderConfirmedEvent` | Wallet outbox | Order, MatchEngine | reservation succeeded; preserve `marketId` and `marketSequence` |
+| `OrderAssetReservationSucceededEvent` | Wallet outbox | Order, MatchEngine | reservation succeeded; preserve `marketId` and `marketSequence` |
 | `OrderFailedEvent` | Wallet outbox | Order | reservation failed |
 | `TradeExecutedEvent` | MatchEngine outbox | Order, Wallet | authoritative durable trade fact |
 | `OrderCancellationRequestedEvent` | Order outbox | MatchEngine | durable request for MatchEngine to arbitrate cancellation against matching |

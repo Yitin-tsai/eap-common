@@ -12,13 +12,13 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderConfirmedEvent {
+public class OrderAssetReservationSucceededEvent {
     private UUID orderId;
     private UUID userId;
     private String marketId;
     private Long marketSequence;
     private Integer price;
-    private Integer amount;  // 修正拼寫錯誤
+    private Integer amount;
     private String orderType;
 
     private LocalDateTime createdAt;

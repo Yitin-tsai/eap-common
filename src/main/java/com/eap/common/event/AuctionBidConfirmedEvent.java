@@ -13,7 +13,7 @@ import java.util.UUID;
  * Event published by wallet after successfully locking funds for an auction bid.
  * Consumed by matchEngine to collect the confirmed bid into Redis.
  *
- * Follows the same wallet-first + outbox pattern as OrderConfirmedEvent:
+ * Follows the same wallet-first + outbox pattern as OrderAssetReservationSucceededEvent:
  * eap-order publishes AuctionBidSubmittedEvent
  *   → eap-wallet locks funds + writes AuctionBidConfirmedEvent to outbox (atomic)
  *   → OutboxPoller publishes to AUCTION_EXCHANGE

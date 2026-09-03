@@ -51,8 +51,8 @@ class CoreEventJsonContractTest {
     }
 
     @Test
-    void orderConfirmedJsonRemainsCompatible() throws Exception {
-        OrderConfirmedEvent event = OrderConfirmedEvent.builder()
+    void orderAssetReservationSucceededJsonContractIsStable() throws Exception {
+        OrderAssetReservationSucceededEvent event = OrderAssetReservationSucceededEvent.builder()
                 .orderId(ORDER_ID)
                 .userId(USER_ID)
                 .marketId("CDA-1")
@@ -63,7 +63,7 @@ class CoreEventJsonContractTest {
                 .createdAt(OCCURRED_AT)
                 .build();
 
-        assertContract(event, OrderConfirmedEvent.class, """
+        assertContract(event, OrderAssetReservationSucceededEvent.class, """
                 {
                   "orderId": "00000000-0000-0000-0000-000000000001",
                   "userId": "00000000-0000-0000-0000-000000000002",

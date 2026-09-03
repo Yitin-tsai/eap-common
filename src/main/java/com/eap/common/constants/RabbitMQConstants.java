@@ -19,10 +19,11 @@ public class RabbitMQConstants {
     
     // Routing Keys (canonical - 每個事件類型一個 routing key)
     public static final String ORDER_SUBMITTED_KEY = "order.submitted";
-    public static final String ORDER_CONFIRMED_KEY = "order.confirmed";
+    public static final String ORDER_ASSET_RESERVATION_SUCCEEDED_KEY = "order.asset-reservation.succeeded";
     public static final String TRADE_EXECUTED_KEY = "trade.executed";
     public static final String ORDER_CANCELLATION_REQUESTED_KEY = "order.cancellation.requested";
     public static final String ORDER_CANCELLATION_RESULT_KEY = "order.cancellation.result";
+    public static final String ORDER_ASSET_RESERVATION_RELEASED_KEY = "order.asset-reservation.released";
     public static final String ORDER_FAILED_KEY = "order.failed";
     
     // Wallet Module Queue Names
@@ -31,14 +32,15 @@ public class RabbitMQConstants {
     public static final String WALLET_ORDER_CANCELLATION_RESULT_QUEUE = "wallet.orderCancellationResult.queue";
     
     // MatchEngine Module Queue Names
-    public static final String MATCH_ENGINE_ORDER_CONFIRMED_QUEUE = "matchEngine.orderConfirmed.queue";
+    public static final String MATCH_ENGINE_ORDER_ASSET_RESERVATION_SUCCEEDED_QUEUE = "matchEngine.orderConfirmed.queue";
     public static final String MATCH_ENGINE_ORDER_CANCELLATION_REQUESTED_QUEUE = "matchEngine.orderCancellationRequested.queue";
     
     // Order Module Queue Names
-    public static final String ORDER_ORDER_CONFIRMED_QUEUE = "order.orderConfirmed.queue";
+    public static final String ORDER_ASSET_RESERVATION_SUCCEEDED_QUEUE = "order.orderConfirmed.queue";
     public static final String ORDER_TRADE_EXECUTED_QUEUE = "order.tradeExecuted.queue";
     public static final String ORDER_ORDER_FAILED_QUEUE = "order.orderFailed.queue";
     public static final String ORDER_ORDER_CANCELLATION_RESULT_QUEUE = "order.orderCancellationResult.queue";
+    public static final String ORDER_ASSET_RESERVATION_RELEASED_QUEUE = "order.assetReservationReleased.queue";
     
     // Auction Exchange
     public static final String AUCTION_EXCHANGE = "auction.exchange";
